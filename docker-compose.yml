@@ -1,0 +1,20 @@
+application:
+ build: ./
+ volumes:
+  - "application:/docker-node/application"
+ environment:
+  REDIS_IP: 192.168.59.103
+ ports:
+  - "80:3000"
+ links:
+  - redis
+redis:
+ build: ./redis
+ ports:
+  - "6379:6379"
+db:
+ build: ./db
+ ports:
+  - "3306:3306"
+
+
