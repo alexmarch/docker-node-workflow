@@ -1,5 +1,8 @@
 FROM dockerfile/nodejs
 
+RUN  apt-get -y update && apt-get -y install libfreetype6 libfreetype6-dev && \
+	apt-get -y install libfontconfig1 libfontconfig1-dev
+
 RUN mkdir /docker-node
 RUN mkdir /docker-node/client
 
