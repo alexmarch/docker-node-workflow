@@ -17,6 +17,9 @@ RUN npm install
 WORKDIR /docker-node/client
 
 ADD application/client/package.json /node-docker/client/package.json
+ADD application/client/bower.json /node-docker/client/bower.json
+
+RUN bower install
 
 ADD application/nodemon.json /node-docker/nodemon.json
 
