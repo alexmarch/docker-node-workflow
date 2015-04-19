@@ -4,7 +4,6 @@ application:
   - "application:/docker-node/application"
  environment:
   REDIS_IP: 192.168.59.103
- command: ln -s /docker-node/client/bower_components /docker-node/application/client/app/bower_components
  ports:
   - "80:3000"
  hostname: formtitan
@@ -15,9 +14,5 @@ redis:
  build: ./redis
  ports:
   - "6379:6379"
-db:
- build: ./db
- ports:
-  - "3306:3306"
 
 
