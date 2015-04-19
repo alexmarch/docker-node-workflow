@@ -22,13 +22,12 @@ ADD application/client/bower.json /docker-node/client/bower.json
 
 RUN bower install --allow-root
 
-RUN ln -s /docker-node/client/bower_components /docker-node/application/client/app/bower_components
-
 ADD application/nodemon.json /node-docker/nodemon.json
 
 WORKDIR /docker-node
 
 EXPOSE 3000
 
+CMD ln -s /docker-node/client/bower_components /docker-node/application/client/app/bower_components
 CMD npm start
 
