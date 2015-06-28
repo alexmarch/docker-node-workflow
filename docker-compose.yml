@@ -1,19 +1,49 @@
+#--------- formtitan app (formbuilder/themebuilder) -----------
 application:
  build: ./
  volumes:
   - "application:/docker-node/application"
  environment:
   REDIS_IP: 192.168.59.103
+  googleAPIKey: AIzaSyBCQP-xQN159LkZZ7XA6ll4AylKySsY2v4
   WITHOUT_IMAGE_PREVIEW: true
+ # command: ln -s /docker-node/client/bower_components/ /docker-node/application/client/app/bower_components
+ # command: ls -la /docker-node/application
  ports:
-  - "80:3000"
+  - "3002"
  hostname: formtitan
  domainname: formtitan.org
  links:
-  - redis
+  - redis:redis
+  #----------- redis server ------------
 redis:
  build: ./redis
  ports:
   - "6379:6379"
-
-
+  #----------- website app ------------
+website:
+ build: ./web-site/formTitan/WebSite
+ environment:
+  REDISHOST: 192.168.59.103
+ volumes:
+  - "web-site/formTitan/WebSite:/web-site/WebSite"
+ ports:
+  - "3001"
+  #----------- helpdesk app ------------
+helpdesk:
+ build: ./web-site/formTitan/helpdesk
+ environment:
+  REDISHOST: 192.168.59.103
+ volumes:
+  - "web-site/formTitan/helpdesk:/helpdesk-app/helpdesk"
+ ports:
+  - "3000"
+  #------------ nginx server --------------
+nginx:
+ build: ./nginx
+ links:
+  - website:website
+  - helpdesk:helpdesk
+  - application:application
+ ports:
+  - "80:80"
