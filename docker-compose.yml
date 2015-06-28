@@ -9,8 +9,10 @@ application:
   WITHOUT_IMAGE_PREVIEW: true
  # command: ln -s /docker-node/client/bower_components/ /docker-node/application/client/app/bower_components
  # command: ls -la /docker-node/application
+ links:
+   - redis:redis
  ports:
-  - "3002"
+  - "3002:3002"
  hostname: formtitan
  domainname: formtitan.org
   #----------- redis server ------------
@@ -26,7 +28,7 @@ website:
  volumes:
   - "web-site/formTitan/WebSite:/web-site/WebSite"
  ports:
-  - "3001"
+  - "3001:3001"
   #----------- helpdesk app ------------
 helpdesk:
  build: ./web-site/formTitan/helpdesk
@@ -35,12 +37,11 @@ helpdesk:
  volumes:
   - "web-site/formTitan/helpdesk:/helpdesk-app/helpdesk"
  ports:
-  - "3000"
+  - "3000:3000"
   #------------ nginx server --------------
 nginx:
  build: ./nginx
  links:
-  - redis
   - application:application
   - website:website
   - helpdesk:helpdesk
