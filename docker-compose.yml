@@ -13,8 +13,6 @@ application:
   - "3002"
  hostname: formtitan
  domainname: formtitan.org
- links:
-  - redis:redis
   #----------- redis server ------------
 redis:
  build: ./redis
@@ -42,8 +40,9 @@ helpdesk:
 nginx:
  build: ./nginx
  links:
+  - redis
+  - application:application
   - website:website
   - helpdesk:helpdesk
-  - application:application
  ports:
   - "80:80"
