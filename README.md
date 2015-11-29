@@ -1,4 +1,6 @@
 # docker-node-workflow
+
+[![Join the chat at https://gitter.im/alexmarch/docker-node-workflow](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/alexmarch/docker-node-workflow?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Workspace for docker + docker-compose  
 
 [Docker compose install](https://docs.docker.com/compose/install/)
